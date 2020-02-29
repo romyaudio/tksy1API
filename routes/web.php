@@ -1,6 +1,5 @@
 <?php
-use Illuminate\Support\Str;
-require "../database/myDatabase/myConection.php";
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +16,4 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/key', function(){
-	return $random = myConection::dbConection();
-});
+$router->get('/users','userControllers@index');
