@@ -25,10 +25,10 @@ class userControllers extends Controller
 
 			$user = User::create([
 				'name' => $data['name'],
-				'username' => $data['username'],
 				'email' => $data['email'],
 				'password' => Hash::make($data['password']),
-				'api_token'=> Str::random(60)
+				'api_token'=> Str::random(60),
+				'activate' => 1
 			]);
 			return response()->json($user,201);
 		}else{

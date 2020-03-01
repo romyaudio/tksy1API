@@ -14,14 +14,18 @@
 
 $router->post('/login','userControllers@getToken');
 
+$router->get('/users','userControllers@index');
+
+$router->post('/create','userControllers@createUser');
+
 $router->get('/', function () use ($router) {
 	return $router->app->version();
 });
 
 $router->group(['middleware' => ['auth']], function () use ($router)
 {
-	$router->get('/users','userControllers@index');
-	$router->post('/users','userControllers@createUser');
+	
+	
 
 });
 
