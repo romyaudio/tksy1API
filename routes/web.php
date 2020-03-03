@@ -16,7 +16,7 @@ $router->post('/login','userControllers@getToken');
 
 $router->get('/users','userControllers@index');
 
-
+$router->post('/create','userControllers@createUser');
 
 $router->get('/', function () use ($router) {
 	return $router->app->version();
@@ -24,7 +24,7 @@ $router->get('/', function () use ($router) {
 
 $router->group(['middleware' => ['auth']], function () use ($router)
 {
-	$router->post('/create','userControllers@createUser');
+	
 	
 
 });
