@@ -28,14 +28,15 @@ class userControllers extends Controller
 			$confiPassword = $data['confiPassword'];
 
 			if (strlen(trim($data['name'])) < 1  || strlen(trim($data['email'])) < 1 || strlen(trim($data['password'])) < 1 || strlen(trim($data['confiPassword'])) < 1) {
-				return response()->json(['isEmpty'=>'You must complete all fields!'],400,);
+				return response()->json(['response'=>'You must complete all fields!'],400,);
 			}
 
-			if ($exitsEmail) {
-				return response()->json(['error'=>'This email is associated with an account!'],400,[]);
-			}
+			if ($password!=$confiPassword) {
+				return response()->json(['response'=>'The password does not match!'],400,[]);
+			}	
 
-			if ($password===$confiPassword) {
+			if (!$exitsEmail) {
+				
 				$user = User::create([
 					'name' => $data['name'],
 					'email' => $data['email'],
@@ -45,7 +46,7 @@ class userControllers extends Controller
 				]);
 				return response()->json($user,201);
 			}else{
-				return response()->json(['error'=>'The password does not match!'],400,[]);
+				return response()->json(['response'=>'This email is associated with an account!'],400,[]);
 			}
 
 		}else{
